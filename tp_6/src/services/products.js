@@ -1,5 +1,17 @@
-import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'
+import { collection, getDocs, doc, deleteDoc, addDoc  } from 'firebase/firestore'
 import database from '../config/firebase'
+
+export const addProduct = async (productData) => {
+  try {
+    const productsCollection = collection(database, 'productos')
+    const docRef = await addDoc(productsCollection, productData)
+    return { id: docRef.id, ...productData }
+  } catch (error) {
+    console.error('Error al agregar producto:', error)
+    throw error
+  }
+}
+
 
 export const deleteProductById = async (productId) => {
   try {
