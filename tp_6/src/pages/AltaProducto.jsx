@@ -1,6 +1,4 @@
-import { collection } from 'firebase/firestore'
 import React, { useState } from 'react'
-import database from '../config/firebase'
 import '../styles/AltaProducto.css';
 import { useNavigate } from 'react-router-dom'
 import { addProduct } from '../services/products'
@@ -69,7 +67,6 @@ const AltaProducto = () => {
         setLoading(true)
 
         const url_img = await getUrlImage(productoActual.imagen)
-        const collection_ref = collection(database, 'productos')
 
         await addProduct( { 
             cantidadDisponible: productoActual.cantidadDisponible,
