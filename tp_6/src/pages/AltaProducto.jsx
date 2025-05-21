@@ -2,8 +2,10 @@ import { addDoc, collection } from 'firebase/firestore'
 import React, { useState } from 'react'
 import database from '../config/firebase'
 import '../styles/AltaProducto.css';
+import { useNavigate } from 'react-router-dom'
 
 const AltaProducto = () => {
+    const navigate = useNavigate();
     let productoNuevo = {
         nombre:'',
         descripcion:'',
@@ -64,7 +66,6 @@ const AltaProducto = () => {
     
         event.preventDefault()
         setLoading(true)
-        alert(productoActual.imagen)
 
         const url_img = await getUrlImage(productoActual.imagen)
         const collection_ref = collection(database, 'productos')
@@ -82,7 +83,8 @@ const AltaProducto = () => {
         )
 
         setProductoActual(productoNuevo)
-        setLoading(false)
+        setLoading(false)        
+        navigate('/productos');
     }
 
     return(

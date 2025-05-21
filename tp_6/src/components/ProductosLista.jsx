@@ -26,7 +26,7 @@ const ProductosLista = () => {
     <div className="productos-lista">
       <h1>Lista de Productos</h1>
       <ul>
-        <Link to='/altaProducto'> Nuevo producto
+        <Link to='/altaProducto' className="btn-nuevo-producto"> Nuevo producto
         </Link>
         {productos.map((producto) => (
           <li key={producto.id} className="producto-item">
