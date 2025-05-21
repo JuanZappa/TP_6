@@ -1,5 +1,15 @@
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'
 import database from '../config/firebase'
+
+export const deleteProductById = async (productId) => {
+  try {
+    const productRef = doc(database, 'productos', productId)
+    await deleteDoc(productRef)
+  } catch (error) {
+    console.error('Error eliminando producto:', error)
+    throw error
+  }
+}
 
 export const getProducts = async () => {
     try {

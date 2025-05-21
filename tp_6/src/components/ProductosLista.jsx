@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/ProductosLista.css"; // Asegúrate de importar el archivo CSS
-import{getProducts} from '../services/products'
+import{getProducts, deleteProductById} from '../services/products'
 
 const ProductosLista = () => {
   const [productos, setProductos] = useState([]);
@@ -22,6 +22,14 @@ const ProductosLista = () => {
     cargarProductos();
   }, []);
 
+  const handleEliminar = async (id) => {
+    const confirmar = window.confirm("¿Confirma la baja?");
+    if (confirmar) {
+      await deleteProductById(id);
+      setProductos(prev => prev.filter(p => p.id !== id));
+    }
+  };
+
   return (
     <div className="productos-lista">
       <h1>Lista de Productos</h1>
@@ -33,6 +41,12 @@ const ProductosLista = () => {
             <Link to={`/productos/${producto.id}`} className="link-detalle">
               {producto.nombre} - ${producto.precioFinal}
             </Link>
+            <button
+              className="btn-eliminar"
+              onClick={() => handleEliminar(producto.id)}
+              title="Eliminar producto">
+              X
+            </button>
           </li>
         ))}
       </ul>
